@@ -1,6 +1,5 @@
 //This code is used to sort any numeriacal data comming from the shell script
 
-#include <iostream>
 #include <vector>
 #include <fstream>
 using namespace std;
