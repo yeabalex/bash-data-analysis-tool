@@ -42,7 +42,7 @@ public:
 
 
 int main(){
-    ofstream write("gdp.txt");
+    ofstream write("gdp.txt", ios::app);
     ifstream read("gdp.txt");
     if(!read.is_open()){
         cout<<"Error opening file";
@@ -57,6 +57,7 @@ int main(){
     
     for(float num: sorter.mergeSort(move(vec))){
         cout<<num<<endl;
+        write<<endl;
         write<<num<<endl;
     }
     cout<<endl;
