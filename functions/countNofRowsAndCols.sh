@@ -17,13 +17,21 @@ column_counter() {
 
 # Define the function to count rows
 row_counter() {
-	row_count=$(cat $link | head -n 1 | grep -o -E '[,;]' | wc -l)
-	if [ $row_count -eq 0 ]; then
-		row_count=$(cat $link | head -n 1 | grep -o -E '[\t]' | wc -l)
-	fi
-	((row_count++))
-	echo $row_count
+    # Count the number of commas or semicolons in the first line
+    row_count=$(cat "$link" | head -n 1 | grep -o -E '[,;]' | wc -l)
+
+    # If no commas or semicolons are found, count the number of tabs instead
+    if [ $row_count -eq 0 ]; then
+        row_count=$(cat "$link" | head -n 1 | grep -o -E '[\t]' | wc -l)
+    fi
+
+    # Increment the row count by 1
+    ((row_count++))
+
+    # Output the final row count
+    echo "$row_count"
 }
+
 
 # Call the function and print the result
 echo "The number of columns: $(column_counter)"
