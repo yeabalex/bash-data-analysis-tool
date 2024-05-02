@@ -5,6 +5,8 @@ read -p "Enter file Path: " file
 if [ ! -f "$file" ]; then
 	echo "File not found"
 else
+	touch "functions/tempAdd.txt"
+	echo "$file" > "functions/tempAdd.txt"
     	echo -e "\t \nWELCOME TO BASH DATA ANALYST :)"
 
 	echo -e "\n 1. Displaying the number of rows and columns in the CSV file. \n 2. Listing unique values in a specified column. \n 3. Column names (header) \n 4. Minimum and maximum values for numeric columns \n 5. The most frequent value for categorical columns \n 6. Calculating summary statistics (mean, median, standard deviation) for 
