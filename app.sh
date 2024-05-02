@@ -7,6 +7,7 @@ if [ ! -f "$file" ]; then
 else
 	touch "functions/tempAdd.txt"
 	echo "$file" > "functions/tempAdd.txt"
+	
     	echo -e "\t \nWELCOME TO BASH DATA ANALYST :)"
 
 	echo -e "\n 1. Displaying the number of rows and columns in the CSV file. \n 2. Listing unique values in a specified column. \n 3. Column names (header) \n 4. Minimum and maximum values for numeric columns \n 5. The most frequent value for categorical columns \n 6. Calculating summary statistics (mean, median, standard deviation) for 
@@ -17,7 +18,7 @@ conditions. \n 8. Sorting the CSV file based on a specific column. \n"
 
 case $choice in
 	1)
-		echo 1;;
+		bash functions/countNofRowsAndCols.sh;;
 	2)
 		echo 2;;
 	3)
