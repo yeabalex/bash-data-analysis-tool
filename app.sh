@@ -16,10 +16,10 @@ else
                    "7" "Filtering and extracting rows and column based on user-defined conditions." \
                    "8" "Sorting the CSV file based on a specific column." \
                    3>&1 1>&2 2>&3)
-
+if [ $? -eq 0 ]; then 
 case ${choice} in
         1)
-                bash functions/countNofRowsAndCols.sh;;
+                bash functions/count-nof-rows-and-cols.sh;;
         2)
                 echo 2;;
         3)
@@ -35,5 +35,7 @@ case ${choice} in
         8)
                 echo 8;;
 esac
-
+else
+echo "Invalid input! Please try again."
+fi
 fi
