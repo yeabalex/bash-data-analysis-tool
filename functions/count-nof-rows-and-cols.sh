@@ -34,6 +34,8 @@ row_counter() {
 
 
 # Call the function and print the result
-echo "The number of columns: $(column_counter)"
-echo "The number of rows: $(row_counter)"
+number_of_cols=$(column_counter)
+number_of_rows=$(row_counter)
+
+whiptail --msgbox "Number of rows: $number_of_rows\nNumber of column: $number_of_cols" 10 40
 
