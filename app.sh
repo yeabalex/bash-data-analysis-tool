@@ -28,7 +28,7 @@ while true; do
         3)
             bash functions/column-names.sh;;
         4)
-            echo 4;;
+            bash functions/get-min-and-max-value.sh;;
         5)
             echo 5;;
         6)
