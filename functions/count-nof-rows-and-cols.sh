@@ -1,17 +1,19 @@
 #!/bin/bash
 
-# Define the function to count columns
+#PATH
 script_dir="$(dirname "$0")"
 link=$(<"$script_dir/tempAdd.txt")
+
+# Define the function to count columns
 column_counter() {
     counter=0
+
     # Read the file line by line
     while read -r; 
     do
-        # Increment the counter for each line
         ((counter++))
     done < "$link"
-    # Output the counter value
+
     echo "$counter"
 }
 
@@ -25,17 +27,14 @@ row_counter() {
         row_count=$(cat "$link" | head -n 1 | grep -o -E '[\t]' | wc -l)
     fi
 
-    # Increment the row count by 1
     ((row_count++))
 
-    # Output the final row count
     echo "$row_count"
 }
 
 
-# Call the function and print the result
 number_of_cols=$(column_counter)
 number_of_rows=$(row_counter)
 
-whiptail --msgbox "Number of rows: $number_of_rows\nNumber of column: $number_of_cols" 10 40
+whiptail --msgbox "Number of rows: $number_of_rows\nNumber of columns: $number_of_cols" 10 40
 
