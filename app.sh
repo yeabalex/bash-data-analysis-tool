@@ -30,7 +30,7 @@ while true; do
         4)
             bash functions/get-min-and-max-value.sh;;
         5)
-            echo 5;;
+            bash functions/most-frequent-value.sh;;
         6)
             echo 6;;
         7)
