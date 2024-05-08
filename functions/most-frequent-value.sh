@@ -43,6 +43,11 @@ get_most_frequent_value(){
     whiptail --msgbox "Most frequent value is: $most_frequent_value\nFrequency: $frequency" 10 50
 }
 
-
-display_rows
-get_most_frequent_value
+while true; do
+    display_rows
+    if [ -z "$choice" ]; then
+        display_menu
+        exit 0
+    fi
+    get_most_frequent_value
+done

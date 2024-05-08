@@ -55,13 +55,15 @@ display_unique_values() {
     detail=$(whiptail --title "Unique value/s for ${choice}" --menu "Select for detail" 15 80 6 "${unique_values[@]}" 3>&1 1>&2 2>&3)
 }
 
-display_rows
+while true; do
+    display_rows
 
-# Check if the user canceled the operation
-if [ -z "$choice" ]; then
-    display_menu
-    exit 0
-fi
+    # Check if the user canceled the operation
+    if [ -z "$choice" ]; then
+        display_menu
+        exit 0
+    fi
 
-get_unique_values
-display_unique_values
+    get_unique_values
+    display_unique_values
+done

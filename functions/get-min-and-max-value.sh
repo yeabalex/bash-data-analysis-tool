@@ -53,6 +53,13 @@ display_min_and_max_values() {
     whiptail --msgbox "Minimum value: $min_val\nMaximum value: $max_val" 10 40
 }
 
+export -f display_numeric_columns
 
-display_numeric_columns
-display_min_and_max_values
+while true; do
+    display_numeric_columns
+    if [ -z "$choice_for_detail" ]; then
+        display_menu
+        exit 0
+    fi
+    display_min_and_max_values
+done

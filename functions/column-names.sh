@@ -11,7 +11,7 @@ display_cols() {
          options+=("${n}" "${lines}")
         ((n++))
     done < <(head -n 1 "$file" | tr "," "\n")
-    whiptail --title "COLUMN NAMES" --msgbox "List of columns:\n\n${options[*]}" 15 80
+    whiptail --title "COLUMN NAMES" --msgbox "List of columns:\n\n${options[*]}\n" 15 80
 }
 
 display_cols

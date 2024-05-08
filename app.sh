@@ -19,7 +19,10 @@ while true; do
                    "8" "Sorting the CSV file based on a specific column." \
                    3>&1 1>&2 2>&3)
 
-    
+    if [ -z "$choice" ]; then
+        break
+        exit 0
+    fi
     case ${choice} in
         1)
             bash functions/count-nof-rows-and-cols.sh;;
