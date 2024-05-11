@@ -2,7 +2,7 @@
 
 script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
-
+source ../app.sh
 # Function to display numeric columns
 display_numeric_columns() {
     # Declare arrays to store all columns and numeric columns
@@ -47,9 +47,27 @@ display_numeric_columns() {
 
 # Function to display minimum and maximum values of the selected numeric column
 display_min_and_max_values() {
-    min_val=$(awk -F '[,;]' -v choice=$choice_for_detail 'NR>1 {print $choice}' "$file" | sort -n | head -n 1)
-    max_val=$(awk -F '[,;]' -v choice=$choice_for_detail 'NR>1 {print $choice}' "$file" | sort -n | tail -n 1)
-    
+    # Get all values for the selected numeric column
+    all_values=$(awk -F '[,;]' -v choice="$choice_for_detail" 'NR>1 {print $choice}' "$file" | sort -n)
+
+    # Find the first non-empty value
+    min_val=""
+    for val in $all_values; do
+        if [ -n "$val" ]; then
+            min_val="$val"
+            break
+        fi
+    done
+
+    # If min_val is still empty, there are no non-empty values
+    if [ -z "$min_val" ]; then
+        whiptail --msgbox "No valid numeric values found for the selected column." 10 40
+        return
+    fi
+
+    # Get the maximum value
+    max_val=$(echo "$all_values" | tail -n 1)
+
     whiptail --msgbox "Minimum value: $min_val\nMaximum value: $max_val" 10 40
 }
 

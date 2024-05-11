@@ -41,18 +41,32 @@ display_numeric_columns() {
 }
 
 # Function to calculate the mean of the selected numeric column
+# Function to calculate the mean of the selected numeric column
 get_mean() {
     # Calculate mean using awk
     mean_and_count=$(awk -F '["'\'',;\t]' -v choice="$choice_for_detail" 'NR>1 {sum+=$choice; count++} END {print sum/count, count, sum}' "$file")
-    # Extract mean, count, and sum for other purpose
-    declare -g mean=$(echo "$mean_and_count" | awk '{printf "%.5f", $1}')
-    declare -g count=$(echo "$mean_and_count" | awk '{print $2}')
-    declare -g sum=$(echo "$mean_and_count" | awk '{print $3}')
+    # Extract mean, count, and sum for other purposes
+    mean=$(echo "$mean_and_count" | awk '{printf "%.5f", $1}')
+    count=$(echo "$mean_and_count" | awk '{print $2}')
+    sum=$(echo "$mean_and_count" | awk '{print $3}')
+
+    # Check if count is zero to avoid division by zero error
+    if [ "$count" -eq 0 ]; then
+        echo "0"
+    else
+        echo "$mean"
+    fi
 }
 
 # Function to calculate the median of the selected numeric column
 get_median() {
     median=0
+    # Check if count is zero to avoid division by zero error
+    if [ "$count" -eq 0 ]; then
+        echo "0"
+        return
+    fi
+
     # Check if count is even or odd
     if [ $((count % 2)) -eq 0 ]; then
         half=$((count/2))
@@ -65,17 +79,27 @@ get_median() {
         # Calculate median for odd count
         half=$(( (count+1) / 2 ))
         median=$(awk -F '["'\'',;\t]' -v choice=$choice_for_detail 'NR>1 {print $choice}' "$file" | sort -n | head -n "$half" | tail -n 1)
-    fi    
+    fi
+
+    echo "$median"
 }
 
 # Function to calculate the standard deviation of the selected numeric column
 get_std_dv() {
     # Calculate the sum of squares of differences from the mean
     sqsm=$(awk -F '["'\'',;\t]' -v choice="$choice_for_detail" 'NR>1 {val=$choice; gsub(/[[:space:]]/, "", val); sum+=(val)^2; count++} END {print sum/count}' "$file")
+
+    # Check if count is zero to avoid division by zero error
+    if [ "$count" -eq 0 ]; then
+        echo "0"
+        return
+    fi
+
     # Calculate standard deviation
     std_dev=$(echo "scale=5; sqrt($sqsm - ($mean)^2)" | bc)
-    echo $std_dev
+    echo "$std_dev"
 }
+
 
 # Function to display calculated values
 display_values() {
@@ -86,10 +110,16 @@ display_values() {
     whiptail --msgbox "Mean: $mean\nMedian: $median\nStandard Deviation: $std_dev" 12 40
 }
 
-#CALL DEM 
-display_numeric_columns
-get_mean
-get_median
-std_dev=$(get_std_dv)
+#CALL DEM
+while true; do
+    display_numeric_columns
+    if [ -z "$choice_for_detail" ]; then
+        break
+        exit 0
+    fi
+    get_mean
+    get_median
+    std_dev=$(get_std_dv)
 
-display_values "$mean" "$median" "$std_dev"
+    display_values "$mean" "$median" "$std_dev"
+done

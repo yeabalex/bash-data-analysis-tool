@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Source the main script containing the menu function
-source ../app.sh
+#source ../app.sh
 
 script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
@@ -48,6 +48,14 @@ get_unique_values() {
             fi
         fi
     done <<< "$values"
+   
+
+    last=$(tail -n 1 <<< "$values")
+    last1=$(tail -n 2 <<< "$values" | head -n 1)
+    
+    if [ $last != $last1 ]; then
+	    unique_values+=("${counter}" "$last")
+    fi
 }
 
 # Function to display unique values for the chosen category
@@ -60,8 +68,7 @@ while true; do
 
     # Check if the user canceled the operation
     if [ -z "$choice" ]; then
-        display_menu
-        exit 0
+        break
     fi
 
     get_unique_values

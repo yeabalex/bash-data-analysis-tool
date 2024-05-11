@@ -27,6 +27,7 @@ get_most_frequent_value(){
     temp=$(head -n 1 <<< "$values")
 
     # Iterate over the sorted values and find the most frequent one
+    frequent_values=()
     while read -r value; do
         if [ "$value" == "$temp" ]; then
             ((temp_freq++))
@@ -34,20 +35,26 @@ get_most_frequent_value(){
             if [ "$temp_freq" -gt "$frequency" ]; then
                 frequency=$temp_freq
                 most_frequent_value=$temp
+		frequent_values+=("$temp")
             fi
             temp_freq=1
             temp=$value
         fi
     done<<<"$values"
+    
+   
 
-    whiptail --msgbox "Most frequent value is: $most_frequent_value\nFrequency: $frequency" 10 50
+    if [ $frequency == 0 ] || [ $frequency == 1 ]; then
+	    whiptail --msgbox "No frequent value has been found" 10 50
+    else
+	    whiptail --msgbox "Most frequent value is: $most_frequent_value\nFrequency: $frequency" 10 50
+    fi
 }
 
 while true; do
     display_rows
     if [ -z "$choice" ]; then
-        display_menu
-        exit 0
+        break
     fi
     get_most_frequent_value
 done
