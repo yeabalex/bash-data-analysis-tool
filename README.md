@@ -1,6 +1,6 @@
 # Bash Data Analysis Tool
 
-This Bash script provides a simple command-line tool for basic data analysis of CSV files. It allows users to display the number of rows and columns in the CSV file, list unique values in a specified column, display minimum and maximum values for numeric columns, display the most frequent value for categorical columns, calculayte summary statistics (mean, median, standard deviation) for numeric columns, filter and extract rows and column based on user-defined conditions, sort the CSV file based on a specific column..
+This Bash script provides a simple command-line tool for basic data analysis of CSV files. It allows users to display the number of rows and columns in the CSV file, list unique values in a specified column, display minimum and maximum values for numeric columns, display the most frequent value for categorical columns, calculate summary statistics (mean, median, standard deviation) for numeric columns, filter and extract rows and column based on user-defined conditions, sort the CSV file based on a specific column..
 
 ## Requirements
 
@@ -13,7 +13,7 @@ This Bash script provides a simple command-line tool for basic data analysis of 
 1. **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/bash-data-analysis-tool.git
+    git clone https://github.com/yeabsira-alemu/bash-data-analysis-tool.git
     ```
 
 2. **Navigate to the directory:**
