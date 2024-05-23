@@ -2,6 +2,7 @@
 
 script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
+output_file="$script_dir/../output/output.txt"
 
 # Function to display categories in a menu
 display_rows() {
@@ -46,8 +47,10 @@ get_most_frequent_value(){
 
     if [ $frequency == 0 ] || [ $frequency == 1 ]; then
 	    whiptail --msgbox "No frequent value has been found" 10 50
+        echo -e "No frequent value has been found\n" >> "$output_file"
     else
 	    whiptail --msgbox "Most frequent value is: $most_frequent_value\nFrequency: $frequency" 10 50
+        echo -e "Most frequent value is: $most_frequent_value\nFrequency: $frequency\n" >> "$output_file"
     fi
 }
 

@@ -2,6 +2,7 @@
 
 script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
+output_file="$script_dir/../output/output.txt"
 
 display_cols() {
     local n=1
@@ -50,7 +51,8 @@ process_data() {
 
         # Loop through both arrays and print in the desired format
         for ((i=0; i<count; i++)); do
-            echo "${formatted_data_array[$i]} - ${cors_rows_array[$i]}"
+            echo "${formatted_data_array[$i]} - ${cors_rows_array[$i]}" >> "$output_file"
+            echo -e "\n" >> "$output_file"
         done
     fi
 }

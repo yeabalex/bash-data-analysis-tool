@@ -5,6 +5,7 @@
 
 script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
+output_file="$script_dir/../output/output.txt"
 
 # Function to display rows (categories) to choose from
 display_rows() {
@@ -61,6 +62,7 @@ get_unique_values() {
 # Function to display unique values for the chosen category
 display_unique_values() {
     detail=$(whiptail --title "Unique value/s for ${choice}" --menu "Select for detail" 15 80 6 "${unique_values[@]}" 3>&1 1>&2 2>&3)
+    echo -e "${unique_values[@]}\n" >> "$output_file"
 }
 
 while true; do

@@ -4,6 +4,7 @@ script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
 
 file=$(echo "$file" | tr -d '[:space:]')
+output_file="$script_dir/../output/output.txt"
 
 # Function to display numeric columns
 display_numeric_columns() {
@@ -108,6 +109,7 @@ display_values() {
     local std_dev="$3"
 
     whiptail --msgbox "Mean: $mean\nMedian: $median\nStandard Deviation: $std_dev" 12 40
+    echo -e "Mean: $mean\nMedian: $median\nStandard Deviation: $std_dev\n" >> "$output_file"
 }
 
 #CALL DEM

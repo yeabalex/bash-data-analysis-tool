@@ -1,5 +1,6 @@
 file=$(whiptail --inputbox "Enter file path: " 8 70 --title "WELCOME TO BASH DATA ANALYST" 3>&1 1>&2 2>&3)
 
+
 if [ -z "$file" ]; then
     whiptail --title "Error" --msgbox "File path cannot be empty. Please enter a valid file path." 8 70
     exit 1
@@ -9,7 +10,7 @@ elif [ ! -f "$file" ]; then
 else
     touch "functions/tempAdd.txt"
     echo "$file" > "functions/tempAdd.txt"
-    
+    echo "" > "output/output.txt"
     # Display the menu
     display_menu(){
         while true; do
@@ -50,5 +51,13 @@ else
             esac
         done
     }
-    display_menu
+    
 fi
+display_menu
+bash output/algorithm/set-date.sh
+
+bash move.sh
+
+
+
+

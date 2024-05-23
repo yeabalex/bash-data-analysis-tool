@@ -2,6 +2,8 @@
 
 script_dir="$(dirname "$0")"
 file=$(<"$script_dir/tempAdd.txt")
+output_file="$script_dir/../output/output.txt"
+
 source ../app.sh
 # Function to display numeric columns
 display_numeric_columns() {
@@ -69,6 +71,9 @@ display_min_and_max_values() {
     max_val=$(echo "$all_values" | tail -n 1)
 
     whiptail --msgbox "Minimum value: $min_val\nMaximum value: $max_val" 10 40
+    echo -e "Minimum value: $min_val\nMaximum value: $max_val\n" >> "$output_file"
+
+
 }
 
 export -f display_numeric_columns
