@@ -37,7 +37,7 @@ number_of_cols=$(column_counter)
 number_of_rows=$(row_counter)
 
 
-message="Number of rows: $number_of_rows\nNumber of columns: $number_of_cols\n"
+message="Number of columns: $number_of_rows\nNumber of rows: $number_of_cols\n"
 
 echo -e "$message\n" >> "$output_file"
 
