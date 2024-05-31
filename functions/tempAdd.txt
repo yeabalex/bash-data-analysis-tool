@@ -1,1 +1,1 @@
-/home/yeab/projects/csv_data_analysis_tool/data_sets/Dataset/hr.csv
+/home/yeab/projects/csv_data_analysis_tool/data_sets/hr.csv
